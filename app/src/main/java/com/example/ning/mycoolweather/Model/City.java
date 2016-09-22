@@ -6,7 +6,7 @@ package com.example.ning.mycoolweather.Model;
 public class City {
     private String cityName;
     private String cityCode;
-    private String provinceId;
+    private String provinceCode;
 
 
     public String getCityName() {
@@ -25,11 +25,11 @@ public class City {
         this.cityCode = cityCode;
     }
 
-    public String getProvinceId() {
-        return provinceId;
+    public String getProvinceCode() {
+        return provinceCode;
     }
 
-    public void setProvinceId(String provinceId) {
-        this.provinceId = provinceId;
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
     }
 }

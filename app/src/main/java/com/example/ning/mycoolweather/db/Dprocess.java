@@ -17,27 +17,27 @@ import java.util.List;
  * Created by Ning on 2016/9/22.
  */
 public class Dprocess {
-    SQLiteDatabase mSQLiteDatabase;
-    Dprocess mDprocess;
-    public Dprocess(Context ct) {
+    private static SQLiteDatabase  mSQLiteDatabase;
+    private  static Dprocess mDprocess;
+    private Dprocess(Context ct) {
         CoolweatherOpenHelper co = new CoolweatherOpenHelper(ct,"Ning",null,1);
         mSQLiteDatabase = co.getWritableDatabase();
     }
 
-    private Dprocess getinstance(Context ct){
+    public static Dprocess getinstance(Context ct){
         if(mDprocess == null)
             return new Dprocess(ct);
         return mDprocess;
     }
 
-    public void saveProvices(List<Province> provinces){
+    public  void saveProvinces(List<Province> provinces){
          if(provinces != null && provinces.size() > 0){
              ContentValues cv = new ContentValues();
              for (int i = 0; i < provinces.size() ; i++) {
                   cv.put("provinceName",provinces.get(i).getProvinceName());
                   cv.put("provinceCode",provinces.get(i).getProvinceCode());
-                  mSQLiteDatabase.insert("Provice",null,cv);
-                 cv.clear();
+                  mSQLiteDatabase.insert("Province" ,null , cv);
+                  cv.clear();
              }
          }
     }
@@ -48,7 +48,7 @@ public class Dprocess {
             for (int i = 0; i < Cities.size() ; i++) {
                 cv.put("cityName",Cities.get(i).getCityName());
                 cv.put("cityCode",Cities.get(i).getCityCode());
-                cv.put("provieceID",Cities.get(i).getProvinceId());
+                cv.put("provinceCode",Cities.get(i).getProvinceCode());
                 mSQLiteDatabase.insert("City",null,cv);
                 cv.clear();
             }
@@ -61,7 +61,7 @@ public class Dprocess {
             for (int i = 0; i < Counties.size() ; i++) {
                 cv.put("countyName",Counties.get(i).getCountyName());
                 cv.put("countyCode",Counties.get(i).getCountyCode());
-                cv.put("cityID",Counties.get(i).getCityId());
+                cv.put("cityCode",Counties.get(i).getCityCode());
                 mSQLiteDatabase.insert("County",null,cv);
                 cv.clear();
             }
@@ -74,7 +74,6 @@ public class Dprocess {
         List<Province> allProvices = new ArrayList<>();
         if (cursor.moveToFirst()) {
            do {
-               Province p;
                p = new Province();
                p.setProvinceCode(cursor.getString(cursor.getColumnIndex("provinceCode")));
                p.setProvinceName(cursor.getString(cursor.getColumnIndex("provinceName")));
@@ -87,14 +86,14 @@ public class Dprocess {
 
     public List<City> getallCities(String code){
         City city;
-        Cursor cursor = mSQLiteDatabase.query("City", null, "provinceId = ?", new String[]{code}, null, null, null);
+        Cursor cursor = mSQLiteDatabase.query("City", null, "provinceCode = ?", new String[]{code}, null, null, null);
         List<City> allCities = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 city = new City();
                 city.setCityCode(cursor.getString(cursor.getColumnIndex("cityCode")));
                 city.setCityName(cursor.getString(cursor.getColumnIndex("cityName")));
-                city.setProvinceId(code);
+                city.setProvinceCode(code);
                 allCities.add(city);
             }while (cursor.moveToNext());
         }
@@ -104,14 +103,14 @@ public class Dprocess {
 
     public List<County> getallCounties(String code){
         County county;
-        Cursor cursor = mSQLiteDatabase.query("City", null, "cityId = ?", new String[]{code}, null, null, null);
+        Cursor cursor = mSQLiteDatabase.query("City", null, "cityCode = ?", new String[]{code}, null, null, null);
         List<County> allCounties = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 county = new County();
                 county.setCountyCode(cursor.getString(cursor.getColumnIndex("cityCode")));
                 county.setCountyName(cursor.getString(cursor.getColumnIndex("cityName")));
-                county.setCityId(code);
+                county.setCityCode(code);
                 allCounties.add(county);
             }while (cursor.moveToNext());
         }
