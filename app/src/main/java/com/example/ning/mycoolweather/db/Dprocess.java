@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Ning on 2016/9/22.
  */
 public class Dprocess {
-    private static SQLiteDatabase  mSQLiteDatabase;
+    private  SQLiteDatabase  mSQLiteDatabase;
     private  static Dprocess mDprocess;
     private Dprocess(Context ct) {
         CoolweatherOpenHelper co = new CoolweatherOpenHelper(ct,"Ning",null,1);
@@ -25,8 +25,9 @@ public class Dprocess {
     }
 
     public static Dprocess getinstance(Context ct){
-        if(mDprocess == null)
-            return new Dprocess(ct);
+        if(mDprocess == null) {
+            mDprocess = new Dprocess(ct);
+        }
         return mDprocess;
     }
 
@@ -103,13 +104,13 @@ public class Dprocess {
 
     public List<County> getallCounties(String code){
         County county;
-        Cursor cursor = mSQLiteDatabase.query("City", null, "cityCode = ?", new String[]{code}, null, null, null);
+        Cursor cursor = mSQLiteDatabase.query("County", null, "cityCode = ?", new String[]{code}, null, null, null);
         List<County> allCounties = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 county = new County();
-                county.setCountyCode(cursor.getString(cursor.getColumnIndex("cityCode")));
-                county.setCountyName(cursor.getString(cursor.getColumnIndex("cityName")));
+                county.setCountyCode(cursor.getString(cursor.getColumnIndex("countyCode")));
+                county.setCountyName(cursor.getString(cursor.getColumnIndex("countyName")));
                 county.setCityCode(code);
                 allCounties.add(county);
             }while (cursor.moveToNext());

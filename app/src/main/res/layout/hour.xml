@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="90sp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="New Text"
+        android:id="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/textView14"
+        android:layout_toEndOf="@id/textView14"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温度："
+            android:id="@+id/textView15"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textView15"
+            android:layout_toEndOf="@id/textView15"
+            android:text="New Text"
+            android:id="@+id/textView19"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="New Text"
+            android:id="@+id/textView18"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="降水概率："
+            android:layout_toLeftOf="@id/textView18"
+            android:layout_toStartOf="@id/textView18"
+            android:id="@+id/textView16"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="风力："
+            android:id="@+id/textView21"
+            android:layout_below="@+id/textView15"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textView22"
+            android:layout_below="@+id/textView15"
+            android:layout_toRightOf="@+id/textView21"
+            android:layout_toEndOf="@+id/textView21"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
